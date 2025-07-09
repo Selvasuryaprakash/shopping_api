@@ -13,14 +13,14 @@ class User(Base):
     email = Column(String(100), unique=True, nullable=False)
     status = Column(Integer)
     createddate = Column(DateTime)
-    privilege_ids = Column(ARRAY(String))
-    role_ids = Column(ARRAY(String))
+    privilege_ids = Column(ARRAY(String),nullable=True)
+    # role_ids = Column(ARRAY(String),nullable=True)
 
     # Relationships
-    roles = relationship("Role", secondary="user_roles", back_populates="users")
-    privileges = relationship("Privilege", secondary="user_privileges", back_populates="users")
-    addresses = relationship("UserAddress", back_populates="user")
-    orders = relationship("UserOrder", back_populates="user")
+    # roles = relationship("Role", secondary="user_roles", back_populates="users")
+    # privileges = relationship("Privilege", secondary="user_privileges", back_populates="users")
+    # addresses = relationship("UserAddress", back_populates="user")
+    # orders = relationship("UserOrder", back_populates="user")
 
 
 class Role(Base):
@@ -28,8 +28,8 @@ class Role(Base):
 
     id = Column(String(8), primary_key=True)
     name = Column(String(50), nullable=False)
-    privileges = relationship("Privilege", secondary="role_privileges", back_populates="roles")
-    users = relationship("User", secondary="user_roles", back_populates="roles")
+    # privileges = relationship("Privilege", secondary="role_privileges", back_populates="roles")
+    # users = relationship("User", secondary="user_roles", back_populates="roles")
 
 
 class Privilege(Base):
@@ -38,8 +38,8 @@ class Privilege(Base):
     id = Column(String(8), primary_key=True)
     name = Column(String(100), nullable=False)
     routeid = Column(String(8))
-    roles = relationship("Role", secondary="role_privileges", back_populates="privileges")
-    users = relationship("User", secondary="user_privileges", back_populates="privileges")
+    # roles = relationship("Role", secondary="role_privileges", back_populates="privileges")
+    # users = relationship("User", secondary="user_privileges", back_populates="privileges")
 
 
 class UserAddress(Base):
@@ -54,7 +54,7 @@ class UserAddress(Base):
     state = Column(String(100), nullable=False)
     pincode = Column(String(7), nullable=False)
 
-    user = relationship("User", back_populates="addresses")
+    # user = relationship("User", back_populates="addresses")
 
 
 class Product(Base):
@@ -80,8 +80,8 @@ class UserOrder(Base):
     orderdate = Column(DateTime, nullable=False)
     delivereddate = Column(DateTime)
 
-    user = relationship("User", back_populates="orders")
-    product = relationship("Product")
+    # user = relationship("User", back_populates="orders")
+    # product = relationship("Product")
     
 
 

@@ -1,18 +1,33 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
+
+class Login(BaseModel):
+    email: str
+    password: str
+
+class Signup(BaseModel):
+    email: str
+    password: str
+    con_pass: str
+    name: str
+
 # ---------- User ----------
 class UserBase(BaseModel):
     name: str
     email: str
+    password: str
+    phone: str
+
+
 
 class UserCreate(UserBase):
     pass
 
 class UserOut(UserBase):
-    id: int
+    id: str
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # ---------- Post ----------
 class PostBase(BaseModel):
@@ -23,10 +38,10 @@ class PostCreate(PostBase):
     user_id: int
 
 class PostOut(PostBase):
-    id: int
+    id: str
     user_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # ---------- Comment ----------
 class CommentBase(BaseModel):
@@ -37,8 +52,8 @@ class CommentCreate(CommentBase):
     post_id: int
 
 class CommentOut(CommentBase):
-    id: int
+    id: str
     user_id: int
     post_id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
