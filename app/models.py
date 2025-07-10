@@ -82,6 +82,15 @@ class UserOrder(Base):
 
     # user = relationship("User", back_populates="orders")
     # product = relationship("Product")
+
+    class Paymentdetails(Base):
+    __tablename__ = 'paymentdetails'
+
+    id = Column(String(50), primary_key=True)
+    productcode = Column(String(50), ForeignKey('products.id'), nullable=False)
+    quantity = Column(Integer)
+    amount = Column(Integer)
+    status = Column(Integer)
     
 
 
